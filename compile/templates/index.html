@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Run your code</title>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+	<script type="text/javascript">
+		$(document).ready(
+				function(){
+
+				$("#GO").click(
+						function(){
+							var e = document.getElementById("lang");
+
+						$.get(
+							"run/" , 
+							{
+								source_code: document.getElementById("code").value ,
+								lang : e.options[e.selectedIndex].value,
+								input : document.getElementById("input").value
+							}
+							,function(data , stat){
+								//alert("Data "+data+"\nStatus: "+stat);
+								document.getElementById("output").innerHTML = data
+							}
+							)
+						}
+					)
+				}
+			);
+	</script>
+
+	<style type="text/css">
+		body{
+			background-color: #EEEEEE
+		}
+		.container{
+			margin: 20px;
+			text-align: center;
+		}
+		#code{
+			margin: 20px;
+			padding: 20px;
+			background-color: #FFFFFF;
+			font-size: 18px;
+		}
+	</style>
+</head>
+<body>
+	<div class = "container">
+	
+		<select name = "lang" id = "lang">
+			<option value="cpp14" selected="selected">C++</option>
+			<option value="java">JAVA</option>
+			<option value="python3">PYTHON 3</option>
+			<option value = "python2">PYTHON 2</option>
+			<option value="csharp">C#</option>
+			<option value="c">C</option>
+		</select> <br>
+		<textarea rows="20" cols="80" placeholder="Your Code Goes Here" id = "code" name = "source_code"></textarea>
+		<br>
+		<textarea rows="5" cols="80" placeholder="stdin" name = "input" id = "input"></textarea>
+		<br><br>
+		<input type="submit" id="GO">
+	
+	<div class="output" style="margin: 20px; padding: 10px;">
+		<textarea rows = "5" cols = "80" placeholder="OUTPUT" id = "output"></textarea>
+	</div>
+	</div>
+</body>
+</html>
